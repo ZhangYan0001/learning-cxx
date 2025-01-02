@@ -55,16 +55,16 @@ int main(int argc, char **argv) {
         }
     }
     {
-        std::vector<char> vec('z', 48); // TODO: 调用正确的构造函数
+        std::vector<char> vec(48, 'z'); // TODO: 调用正确的构造函数
         ASSERT(vec[0] == 'z', "Make this assertion pass.");
         ASSERT(vec[47] == 'z', "Make this assertion pass.");
         ASSERT(vec.size() == 48, "Make this assertion pass.");
-        ASSERT(sizeof(vec) == 48, "Fill in the correct value.");
+        ASSERT(sizeof(vec) == 24, "Fill in the correct value.");
         {
             auto capacity = vec.capacity();
             vec.resize(16);
             ASSERT(vec.size() == 16, "Fill in the correct value.");
-            ASSERT(vec.capacity() == 16, "Fill in a correct identifier.");
+            ASSERT(vec.capacity() == 48, "Fill in a correct identifier.");
         }
         {
             vec.reserve(256);
@@ -77,7 +77,7 @@ int main(int argc, char **argv) {
             vec.push_back('c');
             vec.push_back('d');
             ASSERT(vec.size() == 20, "Fill in the correct value.");
-            ASSERT(vec.capacity() == 260, "Fill in the correct value.");
+            ASSERT(vec.capacity() == 256, "Fill in the correct value.");
             ASSERT(vec[15] == 'z', "Fill in the correct value.");
             ASSERT(vec[16] == 'a', "Fill in the correct value.");
             ASSERT(vec[17] == 'b', "Fill in the correct value.");
